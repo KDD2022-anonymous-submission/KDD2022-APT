@@ -1,8 +1,23 @@
-## Data-Active Pre-training of Graph Neural Networks
+# Data-Active Pre-training of Graph Neural Networks
 
-To run the code, we divide it into 3 steps (1) pre-training/finetuning (2) generate embedding (3) node/graph classification
+Code for KDD'22 Data-Active Pre-training of Graph Neural Networks
 
-#### 1.Pre-training
+##File folders
+
+`splits`: need to unzipped, contains the split data of "Cora, Pubmed, Cornell and Wisconsin".
+
+`dataset`: contains the data of "DD242, DD68, DD687".
+
+`scripts`: contains all the scripts for running code.
+
+`gcc&utils`: contains the code of model.
+
+## How to run the code
+We divide it into 3 steps (1) Pre-training/Finetuning (2) Evaluating (3) Analyze the performance
+
+#### 1.Pre-training / Fine-tuning
+**Pretraining**
+
 Pre-training datasets is stored in `data.bin`
 
 ```bash
@@ -28,40 +43,52 @@ python train_al.py \
   --dgl_file data.bin \
   --moco 
 ```
-#### 2.Finetunine
-Finetune APT on single downstream datasets:
+**Fine-tuning**
 
-```bash
-bash scripts/finetune.sh <load_path> <gpu> usa_airport
-```
-Finetune APT on all downstream datasets
+**Finetune APT on all downstream datasets in the background:**
 
-```bash
-nohup bash evaluate_finetune.sh <saved file> >result.out 2>&1 &
 ```
-
-#### 2.Generate embeddings
-We can 
-```
-bash scripts/generate.sh <gpu> <load_path> 
+nohup bash scripts/evaluate_generate.sh <saved file> > <log file> 2>&1 &
 ```
 
 For example:
 
-```bash
-bash scripts/generate.sh 0 saved/GCC_perturb_16384_0.001_self/current.pth brazil_airport 
+```
+nohup bash scripts/evaluate_generate.sh saved > result.out 2>&1 &
 ```
 
-#### 3.Node/graph Classification
+#### 2.Evaluating
 
-Node classification:
+**Evaluate without Fine-tuning on all downstream datasets in the background:**
 
-```bash
-bash scripts/node_classification/ours.sh <load_path> <hidden_size> brazil_airport
+```
+nohup bash evaluate.sh <load path> <gpu> > <log file> 2>&1 &
 ```
 
-Graph classification:
+For example:
 
-```bash
-bash scripts/graph_classification/ours.sh <load_path> <hidden_size> imdb-binary
 ```
+nohup bash scripts/evaluate.sh saved 0 > log.out 2>&1 &
+```
+
+
+**Evaluate after Fine-tuning on all downstream datasets in the background:**
+
+```
+nohup bash evaluate_finetune.sh <load path> <gpu> > <log file> 2>&1 &
+```
+
+For example:
+
+```
+nohup bash scripts/evaluate_finetune.sh saved 0 > log.out 2>&1 &
+```
+
+#### 3.Analyze the performance
+
+Analyze the performance from log file generated in `Evaluating` phase and save in csv file.
+
+```
+python cope_result.py --file <log file>
+```
+

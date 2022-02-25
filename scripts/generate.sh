@@ -4,5 +4,5 @@ ARGS=${@:3}
 
 for dataset in $ARGS
 do
-    python generate.py --dataset $dataset
+    python generate.py --dataset $dataset --load-path $load_path
 done

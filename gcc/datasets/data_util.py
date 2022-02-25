@@ -26,10 +26,6 @@ import sys
 from scipy.sparse import csr_matrix
 from pathlib import Path
 
-
-#
-# sys.path.append('/home/syf/workspace/jupyters/Nancy/H2GCN')
-# from experiments.h2gcn import utils
 import utils
 import json
 import networkx as nx
@@ -138,14 +134,12 @@ class NewDataEdgelist(object):
         print("using new data")
         self.name = name
         datasets = json.load(open('./dataset.json'))
+        print("####" + name + "####")
         dataset = name
-        print("#####" + dataset + "#####")
         dataset_str = datasets[dataset]['dataset']
         dataset_path = datasets[dataset]['dataset_path'][0]
-        dataset_path = '/home/syf/workspace/jupyters/Nancy/H2GCN' / Path(dataset_path)
         val_size = datasets[dataset]['val_size']
-        print("path")
-        print(dataset_path)
+
         dataset = utils.PlanetoidData(dataset_str=dataset_str, dataset_path=dataset_path, val_size=val_size)
 
         adj = dataset._sparse_data["sparse_adj"]
@@ -480,7 +474,6 @@ class NewRepDataEdgelist(object):
         y = torch.zeros(num_nodes, len(label2id))
         y[nodes, labels] = 1
         return torch.LongTensor(edge_list).t(), y, node2id
-
 
 
 class NewYouDataEdgelist(object):

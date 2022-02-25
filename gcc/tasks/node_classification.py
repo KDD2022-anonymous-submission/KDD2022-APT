@@ -19,8 +19,8 @@ from tqdm import tqdm
 
 import sys
 
-sys.path.append('/home/huangrenhong/gcc_modified')
-# sys.path.append('/home/syf/gcc_modified')
+# this is path of directory
+# sys.path.append('/home/usrname/APT')
 from gcc.datasets.data_util import create_node_classification_dataset
 from gcc.tasks import build_model
 
