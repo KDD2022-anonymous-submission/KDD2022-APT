@@ -28,9 +28,10 @@ In addition, CUDA 10.0 has been used in our project. Although not all dependenci
 We divide it into 3 steps (1) Pre-training/Finetuning (2) Evaluating (3) Analyze the performance.
 
 ### 1.Pre-training / Fine-tuning
-**1.1 Pretraining**
 
-Pre-training datasets is stored in `data.bin`
+Pre-training datasets is stored in `data.bin`. And the datasets can be download through [website](https://drive.google.com/file/d/1kbOciSHXSOAFV7X1CuL_nm9_2sxKeDfU/view).
+
+**1.1 Pretraining**
 
 ```bash
 python train_al.py \
