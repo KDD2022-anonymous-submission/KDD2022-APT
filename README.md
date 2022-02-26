@@ -1,10 +1,10 @@
 # Data-Active Pre-training of Graph Neural Networks
 
-##About
+## About
 
 This project is the implementation of the KDD'22 paper "Data-Active Pre-training of Graph Neural Networks"
 
-##Dependencies
+## Dependencies
 The script has been tested running under Python 3.7.10, with the following packages installed (along with their dependencies):
 
 - `PyTorch ≥ 1.4.0`
@@ -14,7 +14,7 @@ The script has been tested running under Python 3.7.10, with the following packa
 
 In addition, CUDA 10.0 has been used in our project. Although not all dependencies are mentioned in the installation instruction links above, you can find most of the libraries in the package repository of a regular Linux distribution
 
-##File folders
+## File folders
 
 `splits`: **need to unzipped**, contains the split data of "Cora, Pubmed, Cornell and Wisconsin".
 
@@ -108,6 +108,6 @@ python cope_result.py --file <log file>
 python cope_result.py --file test.out
 ```
 
-##Acknowledgements
+## Acknowledgements
 Part of this code is inspired by Qiu et al.'s [GCC: Graph Contrastive Coding](https://github.com/THUDM/GCC).
 
